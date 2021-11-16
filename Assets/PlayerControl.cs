@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerControl : MonoBehaviour
+using Unity.Netcode;
+public class PlayerControl : NetworkBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,19 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(IsServer){
+            ServerUpdate();
+        }
+        if(IsClient && IsOwner){
+            ClientUpdate();
+        }
+    }
+
+    void ServerUpdate(){
+
+    }
+
+    void ClientUpdate(){
+
     }
 }
