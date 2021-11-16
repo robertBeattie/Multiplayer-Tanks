@@ -16,13 +16,7 @@ public class UIManager : MonoBehaviour {
 	}
 
 	private void Start() {
-		client.onClick.AddListener(() => {
-			if (NetworkManager.Singleton.StartClient()) {
-				Debug.Log("Client started...");
-			} else {
-				Debug.Log("Client Could not be started...");
-			}
-		});
+		NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
 
 		server.onClick.AddListener(() => {
 			if (NetworkManager.Singleton.StartServer()) {
@@ -41,7 +35,44 @@ public class UIManager : MonoBehaviour {
 		});
 	}
 
+	public void Join() {
+		NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("room password");
+		if (NetworkManager.Singleton.StartClient()) {
+			Debug.Log("Client started...");
+		} else {
+			Debug.Log("Client Could not be started...");
+		}
+	}
+
 	private void Update() {
 		playersInGame.text = $"Players in game: {PlayersManager.Instance.GetPlayersInGame()}";
+	}
+
+
+	private void Setup() {
+		NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
+		NetworkManager.Singleton.StartHost();
+	}
+
+	private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate callback) {
+		//Your logic here
+		bool approve = false;
+		bool createPlayerObject = true;
+
+		string password = System.Text.Encoding.ASCII.GetString(connectionData);
+		if (password == "room password") {
+			approve = true;
+		}
+		Debug.Log($"Approval: {approve}");
+
+		// The prefab hash. Use null to use the default player prefab
+		// If using this hash, replace "MyPrefabHashGenerator" with the name of a prefab added to the NetworkPrefabs field of your NetworkManager object in the scene
+		//ulong? prefabHash =NetworkSpawnManager.GetPrefabHashFromGenerator("MyPrefabHashGenerator");
+		uint? prefabHash = null;
+		//If approve is true, the connection gets added. If it's false. The client gets disconnected
+		Vector2 defaultPositionRange = new Vector2(-4, 4);
+		Vector3 positionToSpawnAt = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0, Random.Range(defaultPositionRange.x, defaultPositionRange.y));
+		Quaternion rotationToSpawnWith = Quaternion.identity;
+		callback(createPlayerObject, prefabHash, approve, positionToSpawnAt, rotationToSpawnWith);
 	}
 }

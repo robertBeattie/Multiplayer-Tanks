@@ -66,4 +66,6 @@ public class PlayerControl : NetworkBehaviour
         verticalPosition.Value = vertical;
         horizontalPosition.Value = horizontal;
     }
+
+    
 }
