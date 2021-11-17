@@ -23,7 +23,12 @@ public class UIManager : NetworkBehaviour {
 	}
 
 	public void Join() {
-		NetworkManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = inputIP.text;
+		if (inputIP.text != "") {
+			NetworkManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = inputIP.text;
+		} else {
+			NetworkManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = "127.0.0.1";
+		}
+		
 		NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("room password");
 		if (NetworkManager.Singleton.StartClient()) {
 			Debug.Log("Client started...");
