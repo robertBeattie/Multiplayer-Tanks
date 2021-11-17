@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UNET;
 
 public class UIManager : NetworkBehaviour {
     [SerializeField] Button client;
@@ -11,6 +12,7 @@ public class UIManager : NetworkBehaviour {
     [SerializeField] Button host;
 	[SerializeField] Button disconnect;
 	[SerializeField] TextMeshProUGUI playersInGame;
+	[SerializeField] TMP_InputField inputIP;
 
 	private void Awake() {
         Cursor.visible = true;
@@ -21,6 +23,7 @@ public class UIManager : NetworkBehaviour {
 	}
 
 	public void Join() {
+		NetworkManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = inputIP.text;
 		NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("room password");
 		if (NetworkManager.Singleton.StartClient()) {
 			Debug.Log("Client started...");
