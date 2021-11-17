@@ -17,9 +17,15 @@ public class PlayerControl : NetworkBehaviour
     private float previousHorizontalPosition;
 
     [SerializeField] Transform barrelTransform;
+    [SerializeField] NetworkObject bulletPrefab;
+    Camera mainCamera;
 
-    // Start is called before the first frame update
-    void Start()
+	private void Awake() {
+        mainCamera = Camera.main;
+    }
+
+	// Start is called before the first frame update
+	void Start()
     {
         //random offset for spawn
         transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0, Random.Range(defaultPositionRange.x, defaultPositionRange.y));
@@ -53,6 +59,7 @@ public class PlayerControl : NetworkBehaviour
     void UpdateClient(){
         PlayerMovement();
         PlayerMouseAim();
+        PlayerShoot();
     }
 
     void PlayerMovement(){
@@ -70,7 +77,7 @@ public class PlayerControl : NetworkBehaviour
     void PlayerMouseAim(){
         RaycastHit hit;
         Ray ray;
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, 100f))
         {
             UpdateClientLookingRotationServerRpc(hit.point.x,hit.point.z);
@@ -80,6 +87,12 @@ public class PlayerControl : NetworkBehaviour
             UpdateClientLookingRotationServerRpc(barrelTransform.position.x, barrelTransform.position.z);
         }
     }
+
+    void PlayerShoot() {
+		if (Input.GetButtonDown("Fire1")) {
+            SpawnBulletServerRpc();
+        }
+	}
 
     [ServerRpc]
     public void UpdateClientPositionServerRpc(float vertical, float horizontal) {
@@ -91,6 +104,13 @@ public class PlayerControl : NetworkBehaviour
     public void UpdateClientLookingRotationServerRpc(float x, float y) {
         lookX.Value = x;
         lookY.Value = y;
+    }
+
+    [ServerRpc]
+    public void SpawnBulletServerRpc() {
+        NetworkObject bulletInstnace = Instantiate(bulletPrefab, barrelTransform.position, barrelTransform.rotation);
+        bulletInstnace.Spawn();
+
     }
 
     

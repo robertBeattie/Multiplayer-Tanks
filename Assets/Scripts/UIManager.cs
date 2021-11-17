@@ -5,11 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.Netcode;
 
-public class UIManager : MonoBehaviour {
+public class UIManager : NetworkBehaviour {
     [SerializeField] Button client;
     [SerializeField] Button server;
     [SerializeField] Button host;
-    [SerializeField] TextMeshProUGUI playersInGame;
+	[SerializeField] Button disconnect;
+	[SerializeField] TextMeshProUGUI playersInGame;
 
 	private void Awake() {
         Cursor.visible = true;
@@ -23,6 +24,7 @@ public class UIManager : MonoBehaviour {
 		NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("room password");
 		if (NetworkManager.Singleton.StartClient()) {
 			Debug.Log("Client started...");
+			DisableConnectionUI();
 		} else {
 			Debug.Log("Client Could not be started...");
 		}
@@ -30,20 +32,36 @@ public class UIManager : MonoBehaviour {
 
 	public void Server(){
 		if (NetworkManager.Singleton.StartServer()) {
-				Debug.Log("Server started...");
-			} else {
-				Debug.Log("Server Could not be started...");
-			}
+			Debug.Log("Server started...");
+			DisableConnectionUI();
+		} else {
+			Debug.Log("Server Could not be started...");
+		}
 	}
 
 	public void Host(){
 		if (NetworkManager.Singleton.StartHost()) {
-				Debug.Log("Host started...");
-			} else {
-				Debug.Log("Host Could not be started...");
-			}
+			Debug.Log("Host started...");
+			DisableConnectionUI();
+		} else {
+			Debug.Log("Host Could not be started...");
+		}
 	}
 
+	public void Disconnect() {
+		NetworkManager.Singleton.Shutdown();
+		EnableConnectionUI();
+		//UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+	}
+
+	private void DisableConnectionUI() {
+		client.transform.parent.gameObject.SetActive(false);
+		disconnect.transform.parent.gameObject.SetActive(true);
+	}
+	private void EnableConnectionUI() {
+		client.transform.parent.gameObject.SetActive(true);
+		disconnect.transform.parent.gameObject.SetActive(false);
+	}
 
 	private void Update() {
 		playersInGame.text = $"Players in game: {PlayersManager.Instance.GetPlayersInGame()}";
@@ -76,6 +94,7 @@ public class UIManager : MonoBehaviour {
 		for finding Hash of Default Player Doesn't Work. You need to type the full name eg:	
 		ulong? prefabHash = SpawnManager.GetPrefabHashFromGenerator("NetworkPlayer"); // The prefab hash. where "NetworkPlayer" is the name of prefab.
 		*/
+		
 		uint? prefabHash = null;
 		//If approve is true, the connection gets added. If it's false. The client gets disconnected
 		Vector2 defaultPositionRange = new Vector2(-4, 4);
