@@ -17,22 +17,6 @@ public class UIManager : MonoBehaviour {
 
 	private void Start() {
 		NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
-
-		server.onClick.AddListener(() => {
-			if (NetworkManager.Singleton.StartServer()) {
-				Debug.Log("Server started...");
-			} else {
-				Debug.Log("Server Could not be started...");
-			}
-		});
-
-		host.onClick.AddListener(() => {
-			if (NetworkManager.Singleton.StartHost()) {
-				Debug.Log("Host started...");
-			} else {
-				Debug.Log("Host Could not be started...");
-			}
-		});
 	}
 
 	public void Join() {
@@ -43,6 +27,23 @@ public class UIManager : MonoBehaviour {
 			Debug.Log("Client Could not be started...");
 		}
 	}
+
+	public void Server(){
+		if (NetworkManager.Singleton.StartServer()) {
+				Debug.Log("Server started...");
+			} else {
+				Debug.Log("Server Could not be started...");
+			}
+	}
+
+	public void Host(){
+		if (NetworkManager.Singleton.StartHost()) {
+				Debug.Log("Host started...");
+			} else {
+				Debug.Log("Host Could not be started...");
+			}
+	}
+
 
 	private void Update() {
 		playersInGame.text = $"Players in game: {PlayersManager.Instance.GetPlayersInGame()}";
@@ -68,6 +69,13 @@ public class UIManager : MonoBehaviour {
 		// The prefab hash. Use null to use the default player prefab
 		// If using this hash, replace "MyPrefabHashGenerator" with the name of a prefab added to the NetworkPrefabs field of your NetworkManager object in the scene
 		//ulong? prefabHash =NetworkSpawnManager.GetPrefabHashFromGenerator("MyPrefabHashGenerator");
+
+		/*
+		The network Hash Generator doesn't update when we rename the prefab. 
+		So it couldn't find the proper Hash. Secondly for the player approval callback a null value (as written in the documentation) 
+		for finding Hash of Default Player Doesn't Work. You need to type the full name eg:	
+		ulong? prefabHash = SpawnManager.GetPrefabHashFromGenerator("NetworkPlayer"); // The prefab hash. where "NetworkPlayer" is the name of prefab.
+		*/
 		uint? prefabHash = null;
 		//If approve is true, the connection gets added. If it's false. The client gets disconnected
 		Vector2 defaultPositionRange = new Vector2(-4, 4);
