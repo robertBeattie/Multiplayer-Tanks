@@ -14,11 +14,29 @@ public class BulletController : NetworkBehaviour
 	void Update()
     {
 		if (IsServer) {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
+            transform.Translate(transform.forward * speed * Time.deltaTime);
+			Debug.DrawRay(transform.position,transform.forward, Color.green, 2.01f);
 			if(Time.time > deathTime) {
 				GetComponent<NetworkObject>().Despawn(true);
 			}
 		}
     }
+
+	private void OnCollisionEnter(Collision other) {
+		if(!IsServer) return;
+		string tag = other.collider.gameObject.tag;
+		if(tag == "Player" ||
+		tag == "Bullet" ||
+		tag == "Mine"||
+		tag == "Enemy"){
+
+		}else{
+			//wall  
+            Vector3 v = Vector3.Reflect(this.transform.forward, other.contacts[0].normal);
+            float rot = 90 - Mathf.Atan2(v.z, v.x) * Mathf.Rad2Deg;
+            transform.eulerAngles = new Vector3(0, rot, 0);
+            
+		}
+
+	}
 }
