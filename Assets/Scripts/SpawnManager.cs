@@ -17,7 +17,7 @@ public class SpawnManager : NetworkBehaviour {
 	}
 
     public uint GetPrefabHashFromGenerator(string name){
-        return 1106838128;
+        return 1124547038;
     }
 
 }

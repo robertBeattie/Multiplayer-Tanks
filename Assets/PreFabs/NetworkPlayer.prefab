@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1420772749568876681}
   - component: {fileID: 886394222585974363}
   - component: {fileID: 5755792488508342360}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 7889498961881201277}
   - component: {fileID: 7397839264451680934}
   - component: {fileID: 1396415965704912623}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 1903861015229303228}
   - component: {fileID: 8912470889381882034}
   - component: {fileID: 8993336574804779323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrel Cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 782321377214129866}
   - component: {fileID: 2944500286118832417}
   - component: {fileID: 847931365346442769}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 6771149984784828628}
   - component: {fileID: 2314886923650931180}
   - component: {fileID: 708461750453417139}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 2024199893177482736}
   - component: {fileID: 6198601757780634407}
   - component: {fileID: 2533419240634974024}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body Accent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6229989635054660625}
   - component: {fileID: 6927050437214307163}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,7 +609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4306143557584020211}
   - component: {fileID: 8571005426555846076}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +623,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5690252262513053577}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: -5215305116279978500}
   - component: {fileID: 2695185327757544237}
   - component: {fileID: 7217302328532124116}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NetworkPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -791,7 +791,6 @@ MonoBehaviour:
   barrelTransform: {fileID: 4306143557584020211}
   bulletSpawn: {fileID: 1612032502528403040}
   bulletPrefab: {fileID: 4723093469366339343, guid: f66717445ec52f54fbee4884d854f3db, type: 3}
-  trackPrefab: {fileID: 267726415854834400, guid: ecafec3722cbb7d448f78787e7db02e6, type: 3}
   colors:
   - {fileID: 2100000, guid: 68da2273b8c10d34bb8ee2e81a56481a, type: 2}
   - {fileID: 2100000, guid: 707f4026c71d745499dcd3384499443b, type: 2}
@@ -823,7 +822,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &7217302328532124116
 MonoBehaviour:
@@ -848,7 +847,7 @@ GameObject:
   - component: {fileID: 5520618283456698985}
   - component: {fileID: 4640676309793716437}
   - component: {fileID: 1694274946976424797}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -932,7 +931,7 @@ GameObject:
   - component: {fileID: 4724850600957472088}
   - component: {fileID: 1186045493619851218}
   - component: {fileID: 9168931005132542521}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1029,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1612032502528403040}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}

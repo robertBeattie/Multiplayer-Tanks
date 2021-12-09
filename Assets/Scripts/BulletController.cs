@@ -5,7 +5,10 @@ using Unity.Netcode;
 public class BulletController : NetworkBehaviour
 {
     [SerializeField] float speed = 10f;
-	int ricochetCount = 0;
+	public int ricochetLimit = 1;
+	private int ricochetCount = 0;
+
+	[SerializeField] NetworkObject deathMarker;
 	private void Start() {
 		
 	}
@@ -22,13 +25,23 @@ public class BulletController : NetworkBehaviour
 	private void OnCollisionEnter(Collision other) {
 		if(!IsServer) return;
 		string tag = other.collider.gameObject.tag;
-		if(tag == "Player" ||
-		tag == "Bullet" ||
-		tag == "Mine"||
-		tag == "Enemy"){
+		if(tag == "Enemy"){
+			NetworkObject marker = Instantiate(deathMarker, other.gameObject.transform.position,Quaternion.identity);
+			marker.Spawn(true);
+			other.gameObject.GetComponent<NetworkObject>().Despawn(true);
+			GetComponent<NetworkObject>().Despawn(true);
+		}else if (tag == "Player"){		
+			NetworkObject marker = Instantiate(deathMarker, other.gameObject.transform.position,Quaternion.identity);
+			
+			//tp to jail
+			Vector3 jail = new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4) + 30);
+			other.gameObject.transform.position = jail;
+			marker.Spawn(true);
+			GetComponent<NetworkObject>().Despawn(true);
+		}else if(tag == "Bullet" || tag == "Mine"){
 			GetComponent<NetworkObject>().Despawn(true);
 		}else{
-			if(ricochetCount >= 1){
+			if(ricochetCount >= ricochetLimit){
 				GetComponent<NetworkObject>().Despawn(true);
 			}
 			//wall  

@@ -4914,6 +4914,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  ricochetLimit: 1
+  deathMarker: {fileID: 9135128751846311638, guid: 421b4354fc734844d9fe9a5a0f4629fd, type: 3}
 --- !u!54 &6034723326911582873
 Rigidbody:
   m_ObjectHideFlags: 0

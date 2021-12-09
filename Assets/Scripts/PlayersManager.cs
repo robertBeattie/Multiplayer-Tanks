@@ -9,7 +9,7 @@ public class PlayersManager : NetworkBehaviour
 
 	public static PlayersManager Instance { get { return _instance; } }
 
-
+	[SerializeField] NetworkObject playerPrefab;
 	private void Awake() {
 		if (_instance != null && _instance != this) {
 			Destroy(this.gameObject);
@@ -38,4 +38,17 @@ public class PlayersManager : NetworkBehaviour
 			}
 		};
 	}
+
+	private void Update() {
+		if((IsClient) && Input.GetKeyDown(KeyCode.Space)){
+			//ReSpawnPlayerServerRpc();		
+		}
+	}
+
+	[ServerRpc]
+	public void ReSpawnPlayerServerRpc(){
+		NetworkObject player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+		player.Spawn(true);
+	}
+
 }

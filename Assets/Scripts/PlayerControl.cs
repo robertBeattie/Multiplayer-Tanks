@@ -20,8 +20,8 @@ public class PlayerControl : NetworkBehaviour
     [SerializeField] Transform barrelTransform;
     [SerializeField] Transform bulletSpawn;
     [SerializeField] NetworkObject bulletPrefab;
-    [SerializeField] NetworkObject trackPrefab;
-    Vector3 lastTrack;
+    //[SerializeField] NetworkObject trackPrefab;
+    //Vector3 lastTrack;
     Camera mainCamera;
 
     [SerializeField] List<Material> colors = new List<Material>(10);
@@ -39,7 +39,7 @@ public class PlayerControl : NetworkBehaviour
         int dark = light +1;
         SetColor(colors[light],colors[dark]);
 
-        SpawnTrack();
+        //SpawnTrack();
     }
 
     // Update is called once per frame
@@ -71,11 +71,11 @@ public class PlayerControl : NetworkBehaviour
         //lay down track if moved away from last track by some distance
         //lay Tacks
         //Lay down tacks
-        float distance = Vector3.Distance(lastTrack, transform.GetChild(1).position);
-        if (distance >= .5)
-        {
-            SpawnTrack();
-        }
+        //float distance = Vector3.Distance(lastTrack, transform.GetChild(1).position);
+        //if (distance >= .5)
+        // {
+        //     SpawnTrack();
+        //}
         
     }
 
@@ -83,7 +83,9 @@ public class PlayerControl : NetworkBehaviour
         PlayerMovement();
         PlayerMouseAim();
         PlayerShoot();
-
+        if(Input.GetKeyDown(KeyCode.Space)){
+            ReSpawnServerRpc();
+        }
         
     }
 
@@ -127,6 +129,11 @@ public class PlayerControl : NetworkBehaviour
     }
 
     [ServerRpc]
+    public void ReSpawnServerRpc() {
+       transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0, Random.Range(defaultPositionRange.x, defaultPositionRange.y));;
+    }
+
+    [ServerRpc]
     public void UpdateClientLookingRotationServerRpc(float x, float y) {
         lookX.Value = x;
         lookY.Value = y;
@@ -140,12 +147,13 @@ public class PlayerControl : NetworkBehaviour
 
     }
 
-    
+    /*
     public void SpawnTrack() {
         NetworkObject track = Instantiate(trackPrefab, transform.position, transform.GetChild(1).rotation);
         track.Spawn();
         lastTrack = track.transform.position;
     }
+    */
 
     void SetColor(Material bright, Material dark){
         //holder, head, barrel, cap
