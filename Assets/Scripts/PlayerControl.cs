@@ -12,6 +12,7 @@ public class PlayerControl : NetworkBehaviour
 
     [SerializeField] private NetworkVariable<float> lookX = new NetworkVariable<float>();
     [SerializeField] private NetworkVariable<float> lookY = new NetworkVariable<float>();
+  
 
     private float previousVerticalPosition;
     private float previousHorizontalPosition;
@@ -19,6 +20,8 @@ public class PlayerControl : NetworkBehaviour
     [SerializeField] Transform barrelTransform;
     [SerializeField] Transform bulletSpawn;
     [SerializeField] NetworkObject bulletPrefab;
+    [SerializeField] NetworkObject trackPrefab;
+    Vector3 lastTrack;
     Camera mainCamera;
 
     [SerializeField] List<Material> colors = new List<Material>(10);
@@ -35,6 +38,8 @@ public class PlayerControl : NetworkBehaviour
         int light = (id % (colors.Count / 2)) * 2;
         int dark = light +1;
         SetColor(colors[light],colors[dark]);
+
+        SpawnTrack();
     }
 
     // Update is called once per frame
@@ -56,8 +61,21 @@ public class PlayerControl : NetworkBehaviour
 
         barrelTransform.LookAt(new Vector3(lookX.Value, barrelTransform.position.y, lookY.Value));
 
-        //lay down track if moved away from last track by some distance
+        Vector3 moveDirection = new Vector3(horizontalPosition.Value, 0, verticalPosition.Value);
+        if (moveDirection != Vector3.zero)
+        {
+            Quaternion piviotBottomToRoate = Quaternion.LookRotation(moveDirection);
+            transform.GetChild(1).rotation = Quaternion.Slerp(transform.GetChild(1).rotation, piviotBottomToRoate, speed * Time.deltaTime);
+        }
 
+        //lay down track if moved away from last track by some distance
+        //lay Tacks
+        //Lay down tacks
+        float distance = Vector3.Distance(lastTrack, transform.GetChild(1).position);
+        if (distance >= .5)
+        {
+            SpawnTrack();
+        }
         
     }
 
@@ -65,6 +83,8 @@ public class PlayerControl : NetworkBehaviour
         PlayerMovement();
         PlayerMouseAim();
         PlayerShoot();
+
+        
     }
 
     void PlayerMovement(){
@@ -77,6 +97,7 @@ public class PlayerControl : NetworkBehaviour
             previousVerticalPosition = vertical;
             previousHorizontalPosition = horizontal;
         }
+
     }
 
     void PlayerMouseAim(){
@@ -111,11 +132,19 @@ public class PlayerControl : NetworkBehaviour
         lookY.Value = y;
     }
 
+
     [ServerRpc]
     public void SpawnBulletServerRpc() {
         NetworkObject bulletInstnace = Instantiate(bulletPrefab, bulletSpawn.position, barrelTransform.rotation);
         bulletInstnace.Spawn();
 
+    }
+
+    
+    public void SpawnTrack() {
+        NetworkObject track = Instantiate(trackPrefab, transform.position, transform.GetChild(1).rotation);
+        track.Spawn();
+        lastTrack = track.transform.position;
     }
 
     void SetColor(Material bright, Material dark){
@@ -125,8 +154,8 @@ public class PlayerControl : NetworkBehaviour
         transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Renderer>().material = dark;
         transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = dark;
 
-        transform.GetChild(1).GetChild(0).GetComponent<Renderer>().material = bright;
-        transform.GetChild(1).GetComponent<Renderer>().material = dark;
+        transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Renderer>().material = bright;
+        transform.GetChild(1).GetChild(0).GetComponent<Renderer>().material = dark;
 
 
     }
