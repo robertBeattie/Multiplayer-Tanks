@@ -32,27 +32,9 @@ public class PlayerControl : NetworkBehaviour
         //random offset for spawn
         transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0, Random.Range(defaultPositionRange.x, defaultPositionRange.y));
         int id = (int)OwnerClientId;
-        switch (id)
-        {
-            case 0:
-                SetColor(colors[0],colors[1]);
-                break;
-            case 1:
-                SetColor(colors[0],colors[1]);
-                break;
-            case 2:
-                SetColor(colors[2],colors[3]);
-                break;
-            case 3:
-                SetColor(colors[4],colors[5]);
-                break;
-            case 4:
-                SetColor(colors[6],colors[7]);
-                break;
-            default:
-                SetColor(colors[8],colors[9]);
-                break;
-        }
+        int light = (id % (colors.Count / 2)) * 2;
+        int dark = light +1;
+        SetColor(colors[light],colors[dark]);
     }
 
     // Update is called once per frame
