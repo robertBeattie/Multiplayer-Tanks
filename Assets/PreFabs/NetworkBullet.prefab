@@ -4916,6 +4916,15 @@ MonoBehaviour:
   speed: 10
   ricochetLimit: 1
   deathMarker: {fileID: 9135128751846311638, guid: 421b4354fc734844d9fe9a5a0f4629fd, type: 3}
+  markerColors:
+  - {r: 0, g: 0.43529415, b: 1, a: 1}
+  - {r: 1, g: 0.0627451, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.17254902, a: 1}
+  - {r: 0.9843138, g: 1, b: 0, a: 1}
+  - {r: 0.86666673, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.9450981, a: 1}
+  - {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
+  - {r: 1, g: 0.5529412, b: 0, a: 1}
 --- !u!54 &6034723326911582873
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4506218102659280515}
   - component: {fileID: 9135128751846311638}
+  - component: {fileID: 7372914967494296398}
   m_Layer: 0
   m_Name: X
   m_TagString: Untagged
@@ -48,6 +49,27 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &7372914967494296398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219422432909254052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cf3ede54f493214eb3d503f0200031b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerColors:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
+  - {r: 1, g: 0.5529412, b: 0, a: 1}
 --- !u!1 &4514938870229864663
 GameObject:
   m_ObjectHideFlags: 0

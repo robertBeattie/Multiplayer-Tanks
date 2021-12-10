@@ -9,6 +9,7 @@ public class BulletController : NetworkBehaviour
 	private int ricochetCount = 0;
 
 	[SerializeField] NetworkObject deathMarker;
+
 	private void Start() {
 		
 	}
@@ -32,7 +33,8 @@ public class BulletController : NetworkBehaviour
 			GetComponent<NetworkObject>().Despawn(true);
 		}else if (tag == "Player"){		
 			NetworkObject marker = Instantiate(deathMarker, other.gameObject.transform.position,Quaternion.identity);
-			
+			int id = (int) other.collider.gameObject.GetComponent<NetworkObject>().OwnerClientId;
+			marker.GetComponent<Marker>().SetId(id);
 			//tp to jail
 			Vector3 jail = new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4) + 30);
 			other.gameObject.transform.position = jail;
