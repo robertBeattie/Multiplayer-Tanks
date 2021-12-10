@@ -792,8 +792,6 @@ MonoBehaviour:
   bulletSpawn: {fileID: 1612032502528403040}
   bulletPrefab: {fileID: 4723093469366339343, guid: f66717445ec52f54fbee4884d854f3db, type: 3}
   colors:
-  - {fileID: 2100000, guid: 68da2273b8c10d34bb8ee2e81a56481a, type: 2}
-  - {fileID: 2100000, guid: 707f4026c71d745499dcd3384499443b, type: 2}
   - {fileID: 2100000, guid: b9c7e87fdf013274b84ea27cad094a6c, type: 2}
   - {fileID: 2100000, guid: 5b647c0d97e411c43bfb6aa2051eb95e, type: 2}
   - {fileID: 2100000, guid: 558c62ebc89247646b1f435f98b2203a, type: 2}
@@ -808,6 +806,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f83a82e9597d24846a8921403d700305, type: 2}
   - {fileID: 2100000, guid: 36113b58002b29a45bb4019f1519d00e, type: 2}
   - {fileID: 2100000, guid: 6a16ec4c3807f0e45b6e04ba25e754d2, type: 2}
+  - {fileID: 2100000, guid: 68da2273b8c10d34bb8ee2e81a56481a, type: 2}
+  - {fileID: 2100000, guid: 707f4026c71d745499dcd3384499443b, type: 2}
 --- !u!54 &2695185327757544237
 Rigidbody:
   m_ObjectHideFlags: 0
