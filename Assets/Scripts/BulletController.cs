@@ -17,7 +17,7 @@ public class BulletController : NetworkBehaviour
     {
 		if (IsServer) {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
-			Debug.DrawRay(transform.position,transform.forward, Color.green, 2.01f);
+			//Debug.DrawRay(transform.position,transform.forward, Color.green, 2.01f);
 		
 		}
     }

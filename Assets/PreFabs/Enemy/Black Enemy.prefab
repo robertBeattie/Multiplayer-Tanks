@@ -77,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7424437314636562766, guid: 6778c45b700051f488e550ed08fa7679, type: 3}
       propertyPath: behaviour
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7424437314636562766, guid: 6778c45b700051f488e550ed08fa7679, type: 3}
       propertyPath: bulletLimit

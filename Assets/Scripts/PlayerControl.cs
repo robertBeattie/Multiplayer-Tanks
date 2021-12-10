@@ -24,6 +24,15 @@ public class PlayerControl : NetworkBehaviour
     //Vector3 lastTrack;
     Camera mainCamera;
 
+    //bullet limit / reload
+    int bulletLimit = 5;
+
+    int bulletUsed = 0;
+    float bulletCoolDown = 2.5f;
+    float bulletTimer = 0;
+
+
+
     [SerializeField] List<Material> colors = new List<Material>(10);
 	private void Awake() {
         mainCamera = Camera.main;
@@ -83,9 +92,6 @@ public class PlayerControl : NetworkBehaviour
         PlayerMovement();
         PlayerMouseAim();
         PlayerShoot();
-        if(Input.GetKeyDown(KeyCode.Space)){
-            ReSpawnServerRpc();
-        }
         
     }
 
@@ -118,8 +124,19 @@ public class PlayerControl : NetworkBehaviour
 
     void PlayerShoot() {
 		if (Input.GetButtonDown("Fire1")) {
-            SpawnBulletServerRpc();
+            if (bulletUsed < bulletLimit)
+            {
+                SpawnBulletServerRpc();
+                bulletTimer = 0;
+                bulletUsed++;
+            }            
         }
+        if (bulletTimer >= bulletCoolDown)
+        {
+            bulletUsed = 0;
+            bulletTimer = 0;
+        }
+        bulletTimer += Time.deltaTime;
 	}
 
     [ServerRpc]

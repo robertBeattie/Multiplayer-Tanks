@@ -411,6 +411,8 @@ GameObject:
   - component: {fileID: 7424437314636562766}
   - component: {fileID: -4615238144809429976}
   - component: {fileID: 4241098259332892995}
+  - component: {fileID: -6340812521630231291}
+  - component: {fileID: -1478025255849167092}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -491,11 +493,10 @@ MonoBehaviour:
   ricochetLimit: 1
   aimLimit: 0
   bulletLimit: 1
-  trackPreFab: {fileID: 1219422432909254052, guid: ecafec3722cbb7d448f78787e7db02e6, type: 3}
   scanSpeed: 60
   layerMask:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 449
   bulletSpawnLocation: {fileID: 5750075386060193765}
   wanderRadius: 20
   wanderTimer: 0.2
@@ -542,6 +543,34 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   CanCommitToTransform: 0
+--- !u!54 &-6340812521630231291
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5726832705664118178}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
+--- !u!114 &-1478025255849167092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5726832705664118178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7466463446903487690
 GameObject:
   m_ObjectHideFlags: 0

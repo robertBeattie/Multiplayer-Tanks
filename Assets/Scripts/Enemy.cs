@@ -106,10 +106,12 @@ public class Enemy : NetworkBehaviour
     }
 
     void FindPlayers(){
-        players = GameObject.FindGameObjectsWithTag("Player");
-        if(players.Length > 0){
-            playerTarget = players[0];
+        if(playerTarget == null || Vector3.Distance(playerTarget.transform.position, transform.position) > 25){
+            players = GameObject.FindGameObjectsWithTag("Player");
+            playerTarget = players[Random.Range(0,players.Length)];
         }
+        
+        
     }
 
     void SetMovmentSpeed(Movement mv)
@@ -214,11 +216,11 @@ public class Enemy : NetworkBehaviour
         //reflection
         RaycastHit hitOut;
         //numReflections--;
-        if (Physics.Raycast(piviotTop.transform.position, piviotTop.transform.TransformDirection(Vector3.forward), out hitOut, Mathf.Infinity, layerMask))
+        if (Physics.SphereCast(piviotTop.transform.position, 0.6f, piviotTop.transform.TransformDirection(Vector3.forward), out hitOut, Mathf.Infinity, layerMask))
         {
             if (hitOut.transform.gameObject.tag != "Enemy")
             {
-                if (hitOut.transform.gameObject == playerTarget)
+                if (hitOut.transform.gameObject.tag == "Player")
                 {
                     Debug.DrawRay(piviotTop.transform.position, piviotTop.transform.TransformDirection(Vector3.forward) * hitOut.distance, Color.white);
                     fireBullet();
@@ -249,11 +251,11 @@ public class Enemy : NetworkBehaviour
         numReflections--;
         RaycastHit hitOut;
         Vector3 angleOut = Vector3.Reflect(angle, hitIn.normal);
-        if (Physics.Raycast(hitIn.point, angleOut, out hitOut, Mathf.Infinity, layerMask))
+        if (Physics.SphereCast(hitIn.point, 0.6f, angleOut, out hitOut, Mathf.Infinity, layerMask))
         {
             if (hitOut.transform.gameObject.tag != "Enemy")
             {
-                if (hitOut.transform.gameObject == playerTarget)
+                if (hitOut.transform.gameObject.tag == "Player")
                 {
                     Debug.DrawRay(hitIn.point, angleOut * hitOut.distance, Color.white);
                     fireBullet();

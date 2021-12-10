@@ -92,6 +92,10 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7424437314636562766, guid: 6778c45b700051f488e550ed08fa7679, type: 3}
+      propertyPath: RocketPreFab
+      value: 
+      objectReference: {fileID: 4723093469366339343, guid: c4b5f7845eeaa2a41bdde3a215f1fd70, type: 3}
+    - target: {fileID: 7424437314636562766, guid: 6778c45b700051f488e550ed08fa7679, type: 3}
       propertyPath: aimBehaviour
       value: 1
       objectReference: {fileID: 0}
