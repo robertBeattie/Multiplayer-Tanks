@@ -9,13 +9,16 @@ public class Marker : NetworkBehaviour
     int lastID = -1;
 
     private void Start() {
-        SetIDServerRpc(-1);
+        if(IsOwner)
+            SetIDServerRpc(-1);
     }
 
     
     private void Update() {
         if(id.Value != lastID){
-            SetIDServerRpc(lastID);
+            if(IsOwner){
+                SetIDServerRpc(lastID); 
+            }
             SetColor(id.Value);
         }
     }
@@ -24,12 +27,18 @@ public class Marker : NetworkBehaviour
     }
 
     public void SetColor(int id){
-        gameObject.GetComponentInChildren<SpriteRenderer>().color =  markerColor(id);
+        if(id > 8 || id < 0){
+            gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+        }else{
+            gameObject.GetComponentInChildren<SpriteRenderer>().color =  markerColor(id);
+        }
+        
     }
 
     
 	Color markerColor(int id){
-		return markerColors[id % 8];
+        
+		return markerColors[id % 9];
 	}
 
     [ServerRpc]
