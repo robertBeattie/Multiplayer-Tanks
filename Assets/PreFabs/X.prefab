@@ -70,6 +70,9 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 1, a: 1}
   - {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
   - {r: 1, g: 0.5529412, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  id:
+    m_InternalValue: 0
 --- !u!1 &4514938870229864663
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,16 +29,18 @@ public class BulletController : NetworkBehaviour
 		if(tag == "Enemy"){
 			NetworkObject marker = Instantiate(deathMarker, other.gameObject.transform.position,Quaternion.identity);
 			marker.Spawn(true);
+			marker.GetComponent<Marker>().SetId(8);
 			other.gameObject.GetComponent<NetworkObject>().Despawn(true);
 			GetComponent<NetworkObject>().Despawn(true);
 		}else if (tag == "Player"){		
 			NetworkObject marker = Instantiate(deathMarker, other.gameObject.transform.position,Quaternion.identity);
 			int id = (int) other.collider.gameObject.GetComponent<NetworkObject>().OwnerClientId;
 			marker.GetComponent<Marker>().SetId(id);
+			marker.Spawn(true);
 			//tp to jail
 			Vector3 jail = new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4) + 30);
 			other.gameObject.transform.position = jail;
-			marker.Spawn(true);
+			
 			GetComponent<NetworkObject>().Despawn(true);
 		}else if(tag == "Bullet" || tag == "Mine"){
 			GetComponent<NetworkObject>().Despawn(true);

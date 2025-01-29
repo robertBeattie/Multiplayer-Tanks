@@ -597,7 +597,7 @@ MonoBehaviour:
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   CanCommitToTransform: 0
 --- !u!1 &5690252262513053577
 GameObject:
@@ -656,7 +656,7 @@ MonoBehaviour:
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   CanCommitToTransform: 0
 --- !u!1 &7068193880125536643
 GameObject:
@@ -752,7 +752,7 @@ MonoBehaviour:
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
   InLocalSpace: 0
-  Interpolate: 1
+  Interpolate: 0
   CanCommitToTransform: 0
 --- !u!114 &3738807804839710263
 MonoBehaviour:
