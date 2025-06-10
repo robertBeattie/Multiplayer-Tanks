@@ -4,6 +4,8 @@ using UnityEngine;
 using Unity.Netcode;
 public class PlayerControl : NetworkBehaviour
 {
+    public bool IsDead = false;
+
     [SerializeField]
     private float speed = 3.5f;
     [SerializeField] private Vector2 defaultPositionRange = new Vector2(-4, 4);
@@ -20,8 +22,8 @@ public class PlayerControl : NetworkBehaviour
     [SerializeField] Transform barrelTransform;
     [SerializeField] Transform bulletSpawn;
     [SerializeField] NetworkObject bulletPrefab;
-    //[SerializeField] NetworkObject trackPrefab;
-    //Vector3 lastTrack;
+    [SerializeField] GameObject trackPrefab;
+    Vector3 lastTrack;
     Camera mainCamera;
 
     //bullet limit / reload
@@ -31,7 +33,17 @@ public class PlayerControl : NetworkBehaviour
     float bulletCoolDown = 2.5f;
     float bulletTimer = 0;
 
+    public override void OnNetworkSpawn()
+    {
+        if (!IsServer) return;
+        SceneManager.Instance.ActivePlayers.Add(this);
+    }
 
+    public override void OnNetworkDespawn()
+    {
+        if (!IsServer) return;
+        SceneManager.Instance.ActivePlayers.Remove(this);
+    }
 
     [SerializeField] List<Material> colors = new List<Material>(10);
 	private void Awake() {
@@ -77,14 +89,7 @@ public class PlayerControl : NetworkBehaviour
             transform.GetChild(1).rotation = Quaternion.Slerp(transform.GetChild(1).rotation, piviotBottomToRoate, speed * Time.deltaTime);
         }
 
-        //lay down track if moved away from last track by some distance
-        //lay Tacks
-        //Lay down tacks
-        //float distance = Vector3.Distance(lastTrack, transform.GetChild(1).position);
-        //if (distance >= .5)
-        // {
-        //     SpawnTrack();
-        //}
+        
         
     }
 
@@ -92,7 +97,19 @@ public class PlayerControl : NetworkBehaviour
         PlayerMovement();
         PlayerMouseAim();
         PlayerShoot();
-        
+        LayTack();
+    }
+
+    void LayTack()
+    {
+        //lay down track if moved away from last track by some distance
+        //lay Tacks
+        //Lay down tacks
+        float distance = Vector3.Distance(lastTrack, transform.GetChild(1).position);
+        if (distance >= .3)
+        {
+            SpawnTrack();
+        }
     }
 
     void PlayerMovement(){
@@ -164,13 +181,12 @@ public class PlayerControl : NetworkBehaviour
 
     }
 
-    /*
+    
     public void SpawnTrack() {
-        NetworkObject track = Instantiate(trackPrefab, transform.position, transform.GetChild(1).rotation);
-        track.Spawn();
+        GameObject track = Instantiate(trackPrefab, transform.position, transform.GetChild(1).rotation);
         lastTrack = track.transform.position;
     }
-    */
+    
 
     void SetColor(Material bright, Material dark){
         //holder, head, barrel, cap

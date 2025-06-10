@@ -41,10 +41,10 @@ public class Enemy : NetworkBehaviour
     private int bulletfired = 0;
 
     //Tracks
-    /*
+    
     public GameObject trackPreFab;
     private Vector3 lastTrack;
-    */
+    
 
     //Navmesh
     NavMeshAgent agent;
@@ -96,12 +96,14 @@ public class Enemy : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsServer){
+        if (IsServer)
+        {
             FindPlayers();
             fireRateCooldown = fireRateCooldown - Time.deltaTime;
             GetBehavior(behaviour);
-            //LayTracks();
         }
+
+        LayTracks();
         
     }
 
@@ -408,21 +410,20 @@ public class Enemy : NetworkBehaviour
     }
 
 
-    /*
+    
     void InitialTrack()
     {
-        lastTrack = Instantiate(trackPreFab, transform.position, transform.rotation).transform.position;
+        lastTrack = Instantiate(trackPreFab, piviotBottom.transform.position, piviotBottom.transform.rotation).transform.position;
     }
 
     void LayTracks()
     {
         if (Vector3.Distance(lastTrack, piviotBottom.transform.position) >= .3)
         {
-            GameObject track = Instantiate(trackPreFab, piviotBottom.transform.position, piviotBottom.transform.rotation);
-            lastTrack = track.transform.position;
+            lastTrack = Instantiate(trackPreFab, piviotBottom.transform.position, piviotBottom.transform.rotation).transform.position;
         }
     }
-    */
+    
 
     
 }

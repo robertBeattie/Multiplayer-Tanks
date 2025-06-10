@@ -778,6 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f25a51c308f21d44824c3c3bcc4ab5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsDead: 0
   speed: 3.5
   defaultPositionRange: {x: -4, y: 4}
   verticalPosition:
@@ -791,6 +792,7 @@ MonoBehaviour:
   barrelTransform: {fileID: 4306143557584020211}
   bulletSpawn: {fileID: 1612032502528403040}
   bulletPrefab: {fileID: 4723093469366339343, guid: f66717445ec52f54fbee4884d854f3db, type: 3}
+  trackPrefab: {fileID: 1219422432909254052, guid: ecafec3722cbb7d448f78787e7db02e6, type: 3}
   colors:
   - {fileID: 2100000, guid: b9c7e87fdf013274b84ea27cad094a6c, type: 2}
   - {fileID: 2100000, guid: 5b647c0d97e411c43bfb6aa2051eb95e, type: 2}
@@ -937,7 +939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5176939356122378602
 RectTransform:
   m_ObjectHideFlags: 0

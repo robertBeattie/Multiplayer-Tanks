@@ -493,6 +493,7 @@ MonoBehaviour:
   ricochetLimit: 1
   aimLimit: 0
   bulletLimit: 1
+  trackPreFab: {fileID: 1219422432909254052, guid: ecafec3722cbb7d448f78787e7db02e6, type: 3}
   scanSpeed: 60
   layerMask:
     serializedVersion: 2

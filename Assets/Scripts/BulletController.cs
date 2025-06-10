@@ -30,7 +30,9 @@ public class BulletController : NetworkBehaviour
 			NetworkObject marker = Instantiate(deathMarker, other.gameObject.transform.position,Quaternion.identity);
 			marker.Spawn(true);
 			marker.GetComponent<Marker>().SetId(8);
-			other.gameObject.GetComponent<NetworkObject>().Despawn(true);
+			NetworkObject networkObject = other.gameObject.GetComponent<NetworkObject>();
+			SceneManager.Instance.RemoveEnemy(networkObject);
+			networkObject.Despawn(true);
 			GetComponent<NetworkObject>().Despawn(true);
 		}else if (tag == "Player"){		
 			NetworkObject marker = Instantiate(deathMarker, other.gameObject.transform.position,Quaternion.identity);
@@ -40,7 +42,7 @@ public class BulletController : NetworkBehaviour
 			//tp to jail
 			Vector3 jail = new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4) + 30);
 			other.gameObject.transform.position = jail;
-			
+			other.gameObject.GetComponent<PlayerControl>().IsDead = true;
 			GetComponent<NetworkObject>().Despawn(true);
 		}else if(tag == "Bullet" || tag == "Mine"){
 			GetComponent<NetworkObject>().Despawn(true);
