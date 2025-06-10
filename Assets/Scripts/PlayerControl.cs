@@ -66,12 +66,15 @@ public class PlayerControl : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsServer){
+        if (IsServer)
+        {
             UpdateServer();
         }
-        if(IsClient && IsOwner){
+        if (IsClient && IsOwner)
+        {
             UpdateClient();
         }
+        LayTack();
     }
 
     void UpdateServer(){
@@ -97,7 +100,6 @@ public class PlayerControl : NetworkBehaviour
         PlayerMovement();
         PlayerMouseAim();
         PlayerShoot();
-        LayTack();
     }
 
     void LayTack()
