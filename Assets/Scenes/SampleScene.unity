@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2118,6 +2118,8 @@ MonoBehaviour:
   - {fileID: 1989881662}
   - {fileID: 313859253}
   ActiveEnemys: []
+  ActivePlayers: []
+  level: 0
   brown: {fileID: 5521933997540526506, guid: 1997ac9db828fe246a0cceb4a1f40014, type: 3}
   grey: {fileID: 5521933997540526506, guid: e73268f2fa7787c4e8336536a4adc6dd, type: 3}
   teal: {fileID: 5521933997540526506, guid: 6e0eaa24902de234ba011deea8240b52, type: 3}
@@ -19880,7 +19882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &987661338
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23337,7 +23339,7 @@ MonoBehaviour:
   MessageBufferSize: 5120
   MaxConnections: 100
   MaxSentMessageQueueSize: 128
-  ConnectAddress: 152.44.241.69
+  ConnectAddress: 
   ConnectPort: 7777
   ServerListenPort: 7777
   MessageSendMode: 0
@@ -28738,7 +28740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1517644627
 RectTransform:
   m_ObjectHideFlags: 0
